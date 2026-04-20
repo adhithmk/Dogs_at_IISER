@@ -16,7 +16,7 @@ export default function DogCard({ dog, onClick }: DogCardProps) {
         {(dog.image1 || dog.image2 || dog.image3 || dog.image4 || dog.image5) ? (
           <div className="flex h-full">
             {dog.image1 && (
-              <div className="w-1/5">
+              <div className="w-1/5 relative">
                 <Image
                   src={dog.image1}
                   alt={displayName}
@@ -27,7 +27,7 @@ export default function DogCard({ dog, onClick }: DogCardProps) {
               </div>
             )}
             {dog.image2 && (
-              <div className="w-1/5">
+              <div className="w-1/5 relative">
                 <Image
                   src={dog.image2}
                   alt={displayName}
@@ -38,7 +38,7 @@ export default function DogCard({ dog, onClick }: DogCardProps) {
               </div>
             )}
             {dog.image3 && (
-              <div className="w-1/5">
+              <div className="w-1/5 relative">
                 <Image
                   src={dog.image3}
                   alt={displayName}
@@ -49,7 +49,7 @@ export default function DogCard({ dog, onClick }: DogCardProps) {
               </div>
             )}
             {dog.image4 && (
-              <div className="w-1/5">
+              <div className="w-1/5 relative">
                 <Image
                   src={dog.image4}
                   alt={displayName}
@@ -60,7 +60,7 @@ export default function DogCard({ dog, onClick }: DogCardProps) {
               </div>
             )}
             {dog.image5 && (
-              <div className="w-1/5">
+              <div className="w-1/5 relative">
                 <Image
                   src={dog.image5}
                   alt={displayName}
