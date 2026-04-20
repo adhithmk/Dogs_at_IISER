@@ -1,5 +1,5 @@
 import { Dog } from '../lib/csvParser';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 interface DogCardProps {
   dog: Dog;
@@ -13,72 +13,13 @@ export default function DogCard({ dog, onClick }: DogCardProps) {
   return (
     <div className="dog-card" onClick={onClick}>
       <div className="relative h-48 w-full overflow-hidden bg-gray-100">
-        {(dog.image1 || dog.image2 || dog.image3 || dog.image4 || dog.image5) ? (
-          <div className="flex h-full">
-            {dog.image1 && (
-              <div className="w-1/5 relative">
-                <Image
-                  src={dog.image1}
-                  alt={displayName}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            )}
-            {dog.image2 && (
-              <div className="w-1/5 relative">
-                <Image
-                  src={dog.image2}
-                  alt={displayName}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            )}
-            {dog.image3 && (
-              <div className="w-1/5 relative">
-                <Image
-                  src={dog.image3}
-                  alt={displayName}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            )}
-            {dog.image4 && (
-              <div className="w-1/5 relative">
-                <Image
-                  src={dog.image4}
-                  alt={displayName}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            )}
-            {dog.image5 && (
-              <div className="w-1/5 relative">
-                <Image
-                  src={dog.image5}
-                  alt={displayName}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            )}
+        <div className="flex items-center justify-center h-full bg-gradient-to-br from-primary-100 to-earth-100">
+          <div className="text-center">
+            <div className="text-6xl mb-2">??</div>
+            <div className="text-lg text-gray-600">Dog Profile</div>
+            <div className="text-sm text-gray-500 mt-2">{displayName}</div>
           </div>
-        ) : (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-gray-400 text-center">
-              <div className="text-4xl mb-2">??</div>
-              <div className="text-sm">No image</div>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
       
       <div className="p-4">

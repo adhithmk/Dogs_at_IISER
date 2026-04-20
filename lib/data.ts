@@ -13,8 +13,8 @@ export const sampleDogs: Dog[] = [
     neuteringStatus: 'non neutered',
     vaccinationStatus: 'not vaccinated',
     vaccinationDate: '',
-    imageUrl: 'https://drive.google.com/drive/folders/1VqBKM59gAaWjlJab4r31FiRdE87HfIrn?usp=drive_link',
-    images: ['https://drive.google.com/drive/folders/1VqBKM59gAaWjlJab4r31FiRdE87HfIrn?usp=drive_link'],
+    // imageUrl: 'https://drive.google.com/drive/folders/1VqBKM59gAaWjlJab4r31FiRdE87HfIrn?usp=drive_link',
+    // images: ['https://drive.google.com/drive/folders/1VqBKM59gAaWjlJab4r31FiRdE87HfIrn?usp=drive_link'],
     spotted1: 'spotted',
     spotted2: '-'
   },
@@ -30,8 +30,8 @@ export const sampleDogs: Dog[] = [
     neuteringStatus: 'neutered',
     vaccinationStatus: 'mid of December',
     vaccinationDate: 'mid of December',
-    imageUrl: 'https://drive.google.com/drive/folders/1RF8OeyF2Pw-PVdcuHzoVcHJHjgXUcZhn?usp=drive_link',
-    images: ['https://drive.google.com/drive/folders/1RF8OeyF2Pw-PVdcuHzoVcHJHjgXUcZhn?usp=drive_link'],
+    // imageUrl: 'https://drive.google.com/drive/folders/1RF8OeyF2Pw-PVdcuHzoVcHJHjgXUcZhn?usp=drive_link',
+    // images: ['https://drive.google.com/drive/folders/1RF8OeyF2Pw-PVdcuHzoVcHJHjgXUcZhn?usp=drive_link'],
     spotted1: 'spotted',
     spotted2: '-'
   }

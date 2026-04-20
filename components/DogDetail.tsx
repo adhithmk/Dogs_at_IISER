@@ -1,7 +1,7 @@
 import { Dog } from '../lib/csvParser';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { ArrowLeft, MapPin, Calendar, Heart, Shield } from 'lucide-react';
-import ImageGallery from './ImageGallery';
+// import ImageGallery from './ImageGallery';
 
 interface DogDetailProps {
   dog: Dog;
@@ -24,10 +24,13 @@ export default function DogDetail({ dog, onBack }: DogDetailProps) {
 
         <div className="bg-white rounded-2xl shadow-soft-lg overflow-hidden">
           <div className="relative h-96 w-full overflow-hidden bg-gray-100">
-            <ImageGallery 
-              images={[dog.image1, dog.image2, dog.image3, dog.image4, dog.image5].filter(img => img && img.trim() !== '')} 
-              dogName={displayName} 
-            />
+            <div className="flex items-center justify-center h-full bg-gradient-to-br from-primary-100 to-earth-100">
+              <div className="text-center">
+                <div className="text-8xl mb-4">??</div>
+                <div className="text-2xl text-gray-700 font-semibold">{displayName}</div>
+                <div className="text-gray-600 mt-2">Dog Profile</div>
+              </div>
+            </div>
           </div>
 
           <div className="p-8">
