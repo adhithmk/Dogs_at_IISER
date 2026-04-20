@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-earth-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .card-hover {
+    @apply transform transition-all duration-200 hover:scale-105 hover:shadow-soft-lg;
+  }
+  
+  .dog-card {
+    @apply bg-white rounded-xl shadow-soft overflow-hidden card-hover cursor-pointer;
+  }
+  
+  .info-badge {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700;
+  }
+  
+  .status-badge {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .status-neutered {
+    @apply bg-green-100 text-green-700;
+  }
+  
+  .status-non-neutered {
+    @apply bg-yellow-100 text-yellow-700;
+  }
+  
+  .status-vaccinated {
+    @apply bg-blue-100 text-blue-700;
+  }
+  
+  .status-non-vaccinated {
+    @apply bg-red-100 text-red-700;
+  }
+}

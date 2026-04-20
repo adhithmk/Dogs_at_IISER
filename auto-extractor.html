@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Image URL Extractor for Dogs of IISER</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            background-color: #f9f9f9;
+        }
+        .code {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Auto Image URL Extractor for Dogs of IISER</h1>
+        
+        <div class="warning">
+            <strong>Important:</strong> This tool helps you automatically extract image URLs from your Google Drive folder.
+            You'll need to run this in your browser while logged into your Google account.
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Open Your Google Drive Folder</h3>
+            <p>Click this link to open your main folder:</p>
+            <button class="button" onclick="window.open('https://drive.google.com/drive/folders/1DmGks50EfnLZW2D_HfD1vNMFScK0dYBj?usp=sharing')">
+                Open Google Drive Folder
+            </button>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Run the Auto Extractor</h3>
+            <p>Open your browser's developer console (F12 or Ctrl+Shift+I) and paste this code:</p>
+            <div class="code">
+async function extractAllDogImages() {
+    const dogs = [];
+    const folderNames = [];
+    
+    // Get all dog folders
+    const folderElements = document.querySelectorAll('[data-id]');
+    for (let element of folderElements) {
+        const text = element.textContent || element.innerText;
+        if (text.includes('Dog ') && /^\s*Dog \d+\s*$/.test(text.trim())) {
+            folderNames.push(text.trim());
+        }
+    }
+    
+    console.log('Found dog folders:', folderNames);
+    
+    for (let folderName of folderNames) {
+        console.log(`Processing ${folderName}...`);
+        
+        // Click on the folder
+        const folderLink = Array.from(document.querySelectorAll('a')).find(a => 
+            a.textContent.includes(folderName)
+        );
+        
+        if (folderLink) {
+            folderLink.click();
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for folder to load
+            
+            // Get all image links in this folder
+            const imageLinks = [];
+            const links = document.querySelectorAll('a[href*="/file/d/"]');
+            
+            for (let link of links) {
+                const href = link.href;
+                if (href.includes('/file/d/')) {
+                    const fileId = href.match(/\/file\/d\/([^/?]+)/);
+                    if (fileId) {
+                        const directUrl = `https://drive.google.com/uc?export=view&id=${fileId[1]}`;
+                        imageLinks.push(directUrl);
+                    }
+                }
+            }
+            
+            dogs.push({
+                name: folderName,
+                images: imageLinks
+            });
+            
+            console.log(`${folderName}: Found ${imageLinks.length} images`);
+            
+            // Go back to main folder
+            const backButton = document.querySelector('[aria-label="Back"]');
+            if (backButton) backButton.click();
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+    }
+    
+    // Generate CSV
+    let csv = 'Aadhaar ID name,Pictures\n';
+    dogs.forEach(dog => {
+        const imageUrls = dog.images.join(',');
+        csv += `${dog.name},"${imageUrls}"\n`;
+    });
+    
+    console.log('Generated CSV:');
+    console.log(csv);
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(csv).then(() => {
+        console.log('CSV copied to clipboard!');
+        alert('CSV data copied to clipboard! Check console for full data.');
+    });
+    
+    return dogs;
+}
+
+// Run the function
+extractAllDogImages();
+            </div>
+            <button class="button" onclick="copyCode()">
+                Copy Code to Clipboard
+            </button>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Update Your CSV</h3>
+            <p>After running the code, the CSV data will be copied to your clipboard. Paste it into your CSV file.</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Alternative - Manual Quick Method</h3>
+            <p>If the auto method doesn't work, use this faster manual approach:</p>
+            <ol>
+                <li>Open each dog folder</li>
+                <li>Select all images (Ctrl+A)</li>
+                <li>Right-click and "Share"</li>
+                <li>Copy all the share links</li>
+                <li>Paste them below to auto-convert:</li>
+            </ol>
+            <textarea id="shareLinks" style="width: 100%; height: 100px;" placeholder="Paste Google Drive share links here..."></textarea>
+            <button class="button" onclick="convertLinks()">Convert to Direct URLs</button>
+            <div id="conversionResult" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.querySelector('.code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard! Paste it in browser console (F12).');
+            });
+        }
+
+        function convertLinks() {
+            const shareLinks = document.getElementById('shareLinks').value;
+            const result = document.getElementById('conversionResult');
+            
+            const directUrls = shareLinks.split('\n')
+                .map(link => {
+                    const match = link.match(/\/file\/d\/([^/?]+)/);
+                    return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
+                })
+                .filter(url => url)
+                .join(',');
+            
+            result.textContent = directUrls;
+            result.style.display = 'block';
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(directUrls);
+        }
+    </script>
+</body>
+</html>
