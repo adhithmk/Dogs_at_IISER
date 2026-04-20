@@ -13,6 +13,7 @@ export interface Dog {
   vaccinationStatus: string;
   vaccinationDate: string;
   imageUrl: string;
+  images: string[];
   image1: string;
   image2: string;
   image3: string;
